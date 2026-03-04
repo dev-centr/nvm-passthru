@@ -25,5 +25,6 @@ Create a native Windows executable (in Dlang) that discovers the user's availabl
 * [ ] Install scripts formulated (PowerShell written)
 * [ ] Dlang discovery module written
 * [ ] Dlang installer module written
+* [ ] Meta-installer hooks: Implement `--silent` arguments so `winget` can execute it in the background
 * [ ] GitHub Actions CI for auto-building the `.exe` Release
-* [ ] Winget Package Manifest deployment (using `wingetcreate`)
+* [ ] Winget Package Manifest deployment using `installerType: exe` so `winget` automatically runs the installer upon download

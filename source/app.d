@@ -75,44 +75,65 @@ function nvm {
 # == End NVM Passthru Wrapper ==
 `;
 
-
-void installForPowerShell() {
+void installForPowerShell()
+{
     auto docsDir = environment.get("USERPROFILE") ~ "\\Documents";
     string[] psPaths = [
         buildPath(docsDir, "PowerShell", "Microsoft.PowerShell_profile.ps1"),
         buildPath(docsDir, "WindowsPowerShell", "Microsoft.PowerShell_profile.ps1")
     ];
 
-    foreach (path; psPaths) {
-        if (!exists(dirName(path))) {
+    foreach (path; psPaths)
+    {
+        if (!exists(dirName(path)))
+        {
             mkdirRecurse(dirName(path));
         }
-        
+
         // Append or write
         bool alreadyInstalled = false;
-        if (exists(path)) {
+        if (exists(path))
+        {
             string content = readText(path);
-            if (content.canFind("== NVM Passthru Wrapper ==")) {
+            if (content.canFind("== NVM Passthru Wrapper =="))
+            {
                 alreadyInstalled = true;
             }
         }
-        
-        if (!alreadyInstalled) {
+
+        if (!alreadyInstalled)
+        {
             append(path, "\n" ~ PS_WRAPPER ~ "\n");
             writeln("Successfully installed NVM passthru to PowerShell profile: ", path);
-        } else {
+        }
+        else
+        {
             writeln("PowerShell profile already has NVM wrapper installed: ", path);
         }
     }
 }
 
-void main() {
+void main(string[] args)
+{
     writeln("Starting NVM Passthru Environment Setup");
     writeln("-----------------------------------------");
-    
+
     installForPowerShell();
-    
-    // Launch a new, isolated PowerShell terminal window post-setup
-    writeln("Spawning a new PowerShell environment to test changes...");
-    spawnProcess(["pwsh.exe", "-NoExit", "-Command", "Write-Host 'NVM Passthru environment loaded. Try: nvm (version) node -v'"]);
+
+    // Check if this is being run silently (e.g., from Winget)
+    bool isSilent = args.canFind("--silent") || args.canFind("/S");
+
+    if (!isSilent)
+    {
+        // Launch a new, isolated PowerShell terminal window post-setup
+        writeln("Spawning a new PowerShell environment to test changes...");
+        spawnProcess([
+            "pwsh.exe", "-NoExit", "-Command",
+            "Write-Host 'NVM Passthru environment loaded. Try: nvm (version) node -v'"
+        ]);
+    }
+    else
+    {
+        writeln("Silent install complete.");
+    }
 }
