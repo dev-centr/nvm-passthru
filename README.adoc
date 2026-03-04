@@ -1,0 +1,50 @@
+= nvm-passthru
+dev-centr
+
+`nvm-passthru` is an intelligent, drop-in replacement command router that solves the problem of `nvm-windows` globally modifying the system paths. It allows developers to seamlessly route environment paths to specific Node versions per-process instead of modifying the global Windows environment variables.
+
+== Problem
+The traditional `nvm-windows` project operates by aggressively hot-swapping a single global symlink on Windows whenever you run `nvm use vXX.X.X`. This is very destructive to side-by-side terminal windows and automated background tasks, as changing the version in one shell suddenly rips it out from under the other shells on your entire system.
+
+== Solution
+`nvm-passthru` isolates `nvm` commands to the current shell environment natively. By dropping in our intelligent CLI wrapper:
+
+1. **Native Passthru**: Traditional management commands (`nvm list`, `nvm install`) are intercepted and safely passed to the original proxy executable.
+2. **Version Parameter Expansion**: Drop an exact node version variable right in front of your typical commands to spawn them inside a tightly isolated transient `$PATH` environment!
+
+[source,powershell]
+----
+# Drops you right into the REPL for 22.22.0 natively without modifying the system
+nvm 22.22.0
+
+# Executes a script entirely constrained in 22.22.0
+nvm 22.22.0 index.js
+
+# Seamlessly intercepts the npm/yarn/pnpm calls relying precisely on 22.22.0
+nvm 22.22.0 pnpm install
+----
+
+== Installation
+
+Because modifying `cmd.exe` and `pwsh.exe` profiles can be convoluted, we built a standalone `.exe` installer in Dlang. 
+
+Download the latest executable from the Releases page and run it. The installer will:
+* Automatically discover your `PowerShell` and `WindowsPowerShell` `$PROFILE` configurations.
+* Inject the intelligent proxy wrappers natively.
+* Spawn a fresh terminal window immediately ready for use.
+
+=== Winget (Coming Soon)
+We are planning on supporting the Windows Package Manager (winget) for seamless installations. Once the GitHub Actions CI automatically publishes the `.exe` to the repository's Releases, we will submit the software manifest to `microsoft/winget-pkgs`.
+
+`winget install dev-centr.nvm-passthru`
+
+== Building from Source
+
+You will need the `dmd` compiler and `dub` package manager.
+
+[source,powershell]
+----
+git clone https://github.com/dev-centr/nvm-passthru.git
+cd nvm-passthru
+dub build -b release
+----

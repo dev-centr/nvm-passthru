@@ -22,6 +22,8 @@ Create a native Windows executable (in Dlang) that discovers the user's availabl
 
 == Status
 * [x] Project created
-* [ ] Install scripts formulated
+* [ ] Install scripts formulated (PowerShell written)
 * [ ] Dlang discovery module written
 * [ ] Dlang installer module written
+* [ ] GitHub Actions CI for auto-building the `.exe` Release
+* [ ] Winget Package Manifest deployment (using `wingetcreate`)
