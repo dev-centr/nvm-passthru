@@ -1,0 +1,27 @@
+= NVM Windows Passthru
+dev-centr
+:toc:
+
+== Goal
+
+Create a native Windows executable (in Dlang) that discovers the user's available shell environments (PowerShell 5, PowerShell 7, Command Prompt) and installs an `nvm` wrapper into them. This wrapper acts as a drop-in intelligent command router that solves the problem of `nvm-windows` globally modifying the system paths.
+
+== Features
+
+* **PowerShell Profile Installer**: Locates all possible `$PROFILE` files for `pwsh` (PS7+) and `powershell` (PS5) and installs a custom proxy function `nvm`.
+* **CMD AutoRun Installer**: Sets up an AutoRun registry key for `cmd.exe` that points to a `macros.doskey` (or sets a `%PATH%` interceptor via `nvm.cmd` or similar logic). Due to CMD's limitations with functions, a companion `nvm.cmd` batch script may be deployed to a directory injected at the top of the user's `$PATH` to guarantee interception of `node`, `npm`, `pnpm`, etc. before the real ones run. 
+* **Seamless Shell Spawning**: If instructed, the app can spawn pre-configured shell environments for immediate usage.
+
+== Architecture
+
+1. **Discovery Phase**: App inspects `HOME\Documents\PowerShell`, `HOME\Documents\WindowsPowerShell`, and Registry `HKCU\Software\Microsoft\Command Processor`.
+2. **Injection Phase**: 
+  - For PS, we write an `nvm-proxy.psm1` or append the function directly inside the profiles.
+  - For CMD, we might write an `nvm-proxy.cmd` into a newly created `NVM_PROXY_BIN` directory and add that directory to `User PATH`.
+3. **Distribution**: Dlang compiles to a single native binary `.exe`.
+
+== Status
+* [x] Project created
+* [ ] Install scripts formulated
+* [ ] Dlang discovery module written
+* [ ] Dlang installer module written

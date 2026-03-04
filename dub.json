@@ -1,0 +1,8 @@
+{
+	"name": "nvm-passthru",
+	"description": "Installer for NVM Windows passthru environment wrappers",
+	"copyright": "Copyright © 2026, dev-centr",
+	"authors": ["dev-centr"],
+	"license": "MIT",
+	"targetType": "executable"
+}
