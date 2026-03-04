@@ -120,20 +120,6 @@ void main(string[] args)
 
     installForPowerShell();
 
-    // Check if this is being run silently (e.g., from Winget)
-    bool isSilent = args.canFind("--silent") || args.canFind("/S");
-
-    if (!isSilent)
-    {
-        // Launch a new, isolated PowerShell terminal window post-setup
-        writeln("Spawning a new PowerShell environment to test changes...");
-        spawnProcess([
-            "pwsh.exe", "-NoExit", "-Command",
-            "Write-Host 'NVM Passthru environment loaded. Try: nvm (version) node -v'"
-        ]);
-    }
-    else
-    {
-        writeln("Silent install complete.");
-    }
+    writeln("\nInstallation complete!");
+    writeln("Please restart your terminal or run '. $PROFILE' in PowerShell to apply the changes.");
 }
