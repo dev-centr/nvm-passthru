@@ -38,6 +38,27 @@ We are planning on supporting the Windows Package Manager (winget) for seamless 
 
 `winget install dev-centr.nvm-passthru`
 
+==== Windows Meta-Installer Behavior
+
+In package management terminology, this executable operates as a meta-installer when distributed via `winget`. By configuring the winget manifest with `InstallerType: exe`, winget will natively download `nvm-passthru.exe` to a temporary directory and literally execute it to perform the setup procedure (expecting a `0` exit code to report a successful package installation).
+
+To guarantee it plays nicely with non-interactive package pipelines, we built a `--silent` flag right into the Dlang source. 
+
+When the manifest is configured like this:
+
+[source,yaml]
+----
+Installers:
+  - Architecture: x64
+    InstallerUrl: https://github.com/dev-centr/nvm-passthru/releases/latest/download/nvm-passthru.exe
+    InstallerType: exe
+    InstallerSwitches:
+      Silent: --silent
+      SilentWithProgress: --silent
+----
+
+A standard `winget install nvm-passthru` simply runs the executable with the `--silent` flag to quickly drop the intelligent wrapper directly into your environment profiles, print a friendly setup instruction, and exit cleanly without unexpectedly blocking an automated workflow with interactive GUI windows.
+
 == Building from Source
 
 You will need the `dmd` compiler and `dub` package manager.
