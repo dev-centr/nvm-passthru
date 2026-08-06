@@ -1,14 +1,39 @@
-link:https://github.com/dev-centr/nvm-passthru[image:https://img.shields.io/badge/repo-GitHub-24292e?style=flat[Repository]]
+ifndef::env-github[:icons: font]
+:toc: preamble
+:toclevels: 2
+:sectanchors:
+
+ifndef::env-github[]
+image:https://img.shields.io/github/contributors/dev-centr/nvm-passthru.svg?style=for-the-badge[Contributors,link=https://github.com/dev-centr/nvm-passthru/graphs/contributors]
+image:https://img.shields.io/github/forks/dev-centr/nvm-passthru.svg?style=for-the-badge[Forks,link=https://github.com/dev-centr/nvm-passthru/network/members]
+image:https://img.shields.io/github/stars/dev-centr/nvm-passthru.svg?style=for-the-badge[Stars,link=https://github.com/dev-centr/nvm-passthru/stargazers]
+image:https://img.shields.io/github/issues/dev-centr/nvm-passthru.svg?style=for-the-badge[Issues,link=https://github.com/dev-centr/nvm-passthru/issues]
+endif::[]
+
+ifdef::env-github[]
+image:https://img.shields.io/github/contributors/dev-centr/nvm-passthru.svg?style=for-the-badge[Contributors]
+image:https://img.shields.io/github/forks/dev-centr/nvm-passthru.svg?style=for-the-badge[Forks]
+image:https://img.shields.io/github/stars/dev-centr/nvm-passthru.svg?style=for-the-badge[Stars]
+image:https://img.shields.io/github/issues/dev-centr/nvm-passthru.svg?style=for-the-badge[Issues]
+endif::[]
 
 = nvm-passthru
-dev-centr
+
+Intelligent drop-in nvm-windows passthrough; per-process Node version routing on Windows.
+
+link:https://github.com/dev-centr/nvm-passthru/issues[Report Bug] ·
+link:https://github.com/dev-centr/nvm-passthru/issues[Request Feature]
+
+== About The Project
 
 `nvm-passthru` is an intelligent, drop-in replacement command router that solves the problem of `nvm-windows` globally modifying the system paths. It allows developers to seamlessly route environment paths to specific Node versions per-process instead of modifying the global Windows environment variables.
 
-== Problem
+=== Problem
+
 The traditional `nvm-windows` project operates by aggressively hot-swapping a single global symlink on Windows whenever you run `nvm use vXX.X.X`. This is very destructive to side-by-side terminal windows and automated background tasks, as changing the version in one shell suddenly rips it out from under the other shells on your entire system.
 
-== Solution
+=== Solution
+
 `nvm-passthru` isolates `nvm` commands to the current shell environment natively. By dropping in our intelligent CLI wrapper:
 
 1. **Native Passthru**: Traditional management commands (`nvm list`, `nvm install`) are intercepted and safely passed to the original proxy executable.
@@ -28,14 +53,16 @@ nvm 22.22.0 pnpm install
 
 == Installation
 
-Because modifying `cmd.exe` and `pwsh.exe` profiles can be convoluted, we built a standalone `.exe` installer in Dlang. 
+Because modifying `cmd.exe` and `pwsh.exe` profiles can be convoluted, we built a standalone `.exe` installer in Dlang.
 
 Download the latest executable from the Releases page and run it. The installer will:
+
 * Automatically discover your `PowerShell` and `WindowsPowerShell` `$PROFILE` configurations.
 * Inject the intelligent proxy wrappers natively.
 * Spawn a fresh terminal window immediately ready for use.
 
 === Winget (Coming Soon)
+
 We are planning on supporting the Windows Package Manager (winget) for seamless installations. Once the GitHub Actions CI automatically publishes the `.exe` to the repository's Releases, we will submit the software manifest to `microsoft/winget-pkgs`.
 
 `winget install dev-centr.nvm-passthru`
@@ -44,7 +71,7 @@ We are planning on supporting the Windows Package Manager (winget) for seamless 
 
 In package management terminology, this executable operates as a meta-installer when distributed via `winget`. By configuring the winget manifest with `InstallerType: exe`, winget will natively download `nvm-passthru.exe` to a temporary directory and literally execute it to perform the setup procedure (expecting a `0` exit code to report a successful package installation).
 
-To guarantee it plays nicely with non-interactive package pipelines, we built a `--silent` flag right into the Dlang source. 
+To guarantee it plays nicely with non-interactive package pipelines, we built a `--silent` flag right into the Dlang source.
 
 When the manifest is configured like this:
 
@@ -61,7 +88,9 @@ Installers:
 
 A standard `winget install nvm-passthru` simply runs the executable with the `--silent` flag to quickly drop the intelligent wrapper directly into your environment profiles, print a friendly setup instruction, and exit cleanly without unexpectedly blocking an automated workflow with interactive GUI windows.
 
-== Building from Source
+== Usage
+
+=== Building from Source
 
 You will need the `dmd` compiler and `dub` package manager.
 
@@ -71,3 +100,10 @@ git clone https://github.com/dev-centr/nvm-passthru.git
 cd nvm-passthru
 dub build -b release
 ----
+
+== Contact
+
+DevCentr.org — support@devcentr.org
+
+* Project: https://github.com/dev-centr/nvm-passthru
+* Site: https://devcentr.org
