@@ -3,8 +3,27 @@ ifndef::env-github[:icons: font]
 :toclevels: 2
 :sectanchors:
 
-[[readme-top]]
+ifdef::env-github[]
+++++
+<a id="readme-top"></a>
+<div align="center">
+<a href="https://github.com/dev-centr/nvm-passthru/graphs/contributors"><img src="https://img.shields.io/github/contributors/dev-centr/nvm-passthru.svg?style=for-the-badge" alt="Contributors"></a>
+<a href="https://github.com/dev-centr/nvm-passthru/network/members"><img src="https://img.shields.io/github/forks/dev-centr/nvm-passthru.svg?style=for-the-badge" alt="Forks"></a>
+<a href="https://github.com/dev-centr/nvm-passthru/stargazers"><img src="https://img.shields.io/github/stars/dev-centr/nvm-passthru.svg?style=for-the-badge" alt="Stars"></a>
+<a href="https://github.com/dev-centr/nvm-passthru/issues"><img src="https://img.shields.io/github/issues/dev-centr/nvm-passthru.svg?style=for-the-badge" alt="Issues"></a>
+<br />
+<h3 align="center">nvm-passthru</h3>
+<p align="center">
+Intelligent drop-in nvm-windows passthrough; per-process Node version routing on Windows.<br />
+<a href="https://github.com/dev-centr/nvm-passthru/issues">Report Bug</a>
+&middot;
+<a href="https://github.com/dev-centr/nvm-passthru/issues">Request Feature</a>
+</p>
+</div>
+++++
+endif::[]
 
+ifndef::env-github[]
 image:https://img.shields.io/github/contributors/dev-centr/nvm-passthru.svg?style=for-the-badge[Contributors,link=https://github.com/dev-centr/nvm-passthru/graphs/contributors]
 image:https://img.shields.io/github/forks/dev-centr/nvm-passthru.svg?style=for-the-badge[Forks,link=https://github.com/dev-centr/nvm-passthru/network/members]
 image:https://img.shields.io/github/stars/dev-centr/nvm-passthru.svg?style=for-the-badge[Stars,link=https://github.com/dev-centr/nvm-passthru/stargazers]
@@ -16,6 +35,7 @@ Intelligent drop-in nvm-windows passthrough; per-process Node version routing on
 
 link:https://github.com/dev-centr/nvm-passthru/issues[Report Bug] ·
 link:https://github.com/dev-centr/nvm-passthru/issues[Request Feature]
+endif::[]
 
 == About The Project
 
