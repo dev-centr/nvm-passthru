@@ -3,19 +3,12 @@ ifndef::env-github[:icons: font]
 :toclevels: 2
 :sectanchors:
 
-ifndef::env-github[]
+[[readme-top]]
+
 image:https://img.shields.io/github/contributors/dev-centr/nvm-passthru.svg?style=for-the-badge[Contributors,link=https://github.com/dev-centr/nvm-passthru/graphs/contributors]
 image:https://img.shields.io/github/forks/dev-centr/nvm-passthru.svg?style=for-the-badge[Forks,link=https://github.com/dev-centr/nvm-passthru/network/members]
 image:https://img.shields.io/github/stars/dev-centr/nvm-passthru.svg?style=for-the-badge[Stars,link=https://github.com/dev-centr/nvm-passthru/stargazers]
 image:https://img.shields.io/github/issues/dev-centr/nvm-passthru.svg?style=for-the-badge[Issues,link=https://github.com/dev-centr/nvm-passthru/issues]
-endif::[]
-
-ifdef::env-github[]
-image:https://img.shields.io/github/contributors/dev-centr/nvm-passthru.svg?style=for-the-badge[Contributors]
-image:https://img.shields.io/github/forks/dev-centr/nvm-passthru.svg?style=for-the-badge[Forks]
-image:https://img.shields.io/github/stars/dev-centr/nvm-passthru.svg?style=for-the-badge[Stars]
-image:https://img.shields.io/github/issues/dev-centr/nvm-passthru.svg?style=for-the-badge[Issues]
-endif::[]
 
 = nvm-passthru
 
@@ -50,6 +43,23 @@ nvm 22.22.0 index.js
 # Seamlessly intercepts the npm/yarn/pnpm calls relying precisely on 22.22.0
 nvm 22.22.0 pnpm install
 ----
+
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
+
+== Built With
+
+* Language
+** link:https://dlang.org/[image:https://img.shields.io/badge/D-B03931?style=for-the-badge&logo=d&logoColor=white[D]]
+* Target runtime
+** link:https://nodejs.org/[image:https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white[Node.js]]
+* Integrates with
+** link:https://github.com/coreybutler/nvm-windows[nvm-windows]
+
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
 
 == Installation
 
@@ -107,3 +117,7 @@ DevCentr.org — support@devcentr.org
 
 * Project: https://github.com/dev-centr/nvm-passthru
 * Site: https://devcentr.org
+
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
